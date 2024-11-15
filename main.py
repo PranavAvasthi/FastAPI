@@ -2,6 +2,7 @@ from fastapi import FastAPI # type: ignore
 from typing import Optional
 # Using pydantic for data validation
 from pydantic import BaseModel # type: ignore
+import uvicorn # type: ignore
 
 app = FastAPI()
 
@@ -49,3 +50,7 @@ class Blog(BaseModel):
 @app.post('/blog')
 def create_blog(request: Blog):
     return {'data': f'Blog is created with title as {request.title}'}
+
+# To run on a custom port
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=4000)
