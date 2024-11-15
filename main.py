@@ -1,5 +1,7 @@
 from fastapi import FastAPI # type: ignore
 from typing import Optional
+# Using pydantic for data validation
+from pydantic import BaseModel # type: ignore
 
 app = FastAPI()
 
@@ -36,3 +38,14 @@ def comments(id):
 @app.get('/blog/unpublished')
 def unpublished():
     return {'data': 'all unpublished blogs'}
+
+# Model
+class Blog(BaseModel):
+    title: str
+    body: str
+    published: Optional[bool] = None
+
+# Post Method
+@app.post('/blog')
+def create_blog(request: Blog):
+    return {'data': f'Blog is created with title as {request.title}'}
