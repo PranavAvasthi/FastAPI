@@ -1,4 +1,4 @@
-from .. import schemas, database, models
+from .. import schemas, database
 from fastapi import APIRouter, Depends, status # type: ignore
 from sqlalchemy.orm import Session # type: ignore
 from ..repository import user
